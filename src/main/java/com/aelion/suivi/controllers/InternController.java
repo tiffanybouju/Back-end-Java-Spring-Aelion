@@ -93,5 +93,6 @@ public class InternController {
 	public List<InternEntity> findByFirstname(@PathVariable String firstname){
 	return this.internService.findByFirstname(firstname);
 	}
+	
 }
 	
