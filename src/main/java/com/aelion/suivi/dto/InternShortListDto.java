@@ -14,13 +14,13 @@ import com.aelion.suivi.entities.InternEntity;
 public class InternShortListDto {
 	public Long id;
 	public String name;
-	public String firstname;
+	public String firstName;
 	public Date birthDate;
 	
 	public InternShortListDto transform(InternEntity intern) {
 		this.id = intern.getId();
 		this.name = intern.getName();
-		this.firstname = intern.getFirstname();
+		this.firstName = intern.getFirstName();
 		this.birthDate = intern.getBirthDate();
 		
 		return this;

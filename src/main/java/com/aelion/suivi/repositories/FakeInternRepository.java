@@ -67,18 +67,18 @@ public final class FakeInternRepository {
 		intern.setId(1L);
 		//1L est 1 en longue
 		intern.setName("Aubert");
-		intern.setFirstname("Jean");
+		intern.setFirstName("Jean");
 		intern.setEmail("qjhrgqhg@gmail.com");
-		intern.setPhonenumber("+(33)6 58 23 69 41");
+		intern.setPhoneNumber("+(33)6 58 23 69 41");
 		
 		this.interns.add(intern);
 		
 		intern = new InternEntity();
 		intern.setId(2L);
 		intern.setName("Philippe");
-		intern.setFirstname("Didier");
+		intern.setFirstName("Didier");
 		intern.setEmail("gqrghqzr@gmail.com");
-		intern.setPhonenumber("+(33)6 58 31 69 14"); 
+		intern.setPhoneNumber("+(33)6 58 31 69 14"); 
 		this.interns.add(intern);
 	}
 }

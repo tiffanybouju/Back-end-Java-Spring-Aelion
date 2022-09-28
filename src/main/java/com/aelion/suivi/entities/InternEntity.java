@@ -3,13 +3,16 @@
  */
 package com.aelion.suivi.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,12 +27,18 @@ public class InternEntity {
 	private Long id;
 	
 	private String name;
-	private String firstname;
+	private String firstName;
 	private Date birthDate;
-	@Column (unique=true)
+	@Column(unique=true, nullable=false)
 	private String email;
-	private String phonenumber;
+	private String phoneNumber;
 	private String address;
+	
+	@OneToMany(mappedBy="intern") // intern attribute of InternEvaluation Class
+	private List<InternEvaluationEntity> evaluations = new ArrayList<>();
+	// pour un intern on a accès a plusieurs evaluation 
+	//one to many il se passe rien physiquement dans la base de données
+
 	/**
 	 * @return the id
 	 */
@@ -55,16 +64,16 @@ public class InternEntity {
 		this.name = name;
 	}
 	/**
-	 * @return the firstname
+	 * @return the firstName
 	 */
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 	/**
-	 * @param firstname the firstname to set
+	 * @param firstName the firstName to set
 	 */
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	/**
 	 * @return the birthDate
@@ -91,16 +100,16 @@ public class InternEntity {
 		this.email = email;
 	}
 	/**
-	 * @return the phonenumber
+	 * @return the phoneNumber
 	 */
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 	/**
-	 * @param phonenumber the phonenumber to set
+	 * @param phoneNumber the phoneNumber to set
 	 */
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	/**
 	 * @return the address

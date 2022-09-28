@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aelion.suivi.dto.InternInputDto;
 import com.aelion.suivi.dto.InternShortListDto;
 import com.aelion.suivi.entities.InternEntity;
 import com.aelion.suivi.services.InternService;
@@ -32,20 +34,45 @@ public class InternController {
 	@Autowired
 	private InternService internService;
 	
-	@GetMapping("/hello")
-	public ResponseEntity<String> greetings() {
-		return ResponseEntity.ok("Hello SpringBoot");
+	/**
+	 * @param InternInputDto
+	 * @return 201 http-status
+	 */
+	@PostMapping
+	@CrossOrigin
+	public InternEntity add(@RequestBody InternInputDto intern) {
+		return this.internService.addInternAndPoes(intern);
 	}
+	
+//	/**
+//	 * 
+//	 * @param intern
+//	 * @return
+//	 */
+//	
+//	@PostMapping()
+//	@CrossOrigin()
+//	public InternEntity add(@RequestBody InternEntity intern) {
+//		return this.internService.add(intern);
+//	}
 	
 	@GetMapping("/shortlist")
 	public List<InternShortListDto> shortList() {
 		return this.internService.shortlist();
 	}
 	
-	
+	@GetMapping("/byemail")
+	@CrossOrigin
+	public ResponseEntity<?> byEmail(@RequestParam() String email) {
+	return this.internService.byEmail(email);
+	}
+	//@RequestParam() fait référence au paramètre passé dans une URI sous la forme suivante :
+	//http://127.0.0.1:5000/intern/bymail?email=truc@machin.com
+	//On appelle ce qui se situe après le ? la Query String.
+				
 	@GetMapping("/{id}")
 	//la route
-	
+	@CrossOrigin
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
 		Optional<InternEntity> oInternEntity = this.internService.findOne(id);
 		
@@ -60,17 +87,7 @@ public class InternController {
 	public List<InternEntity> getAll() {
 		return this.internService.findAll();
 	}
-	/**
-	 * 
-	 * @param intern
-	 * @return
-	 */
-	
-	@PostMapping()
-	public InternEntity add(@RequestBody InternEntity intern) {
-		return this.internService.add(intern);
-	}
-	
+
 	@DeleteMapping()
 	@CrossOrigin
 	public ResponseEntity<InternEntity>delete(@RequestBody InternEntity intern) {
@@ -90,8 +107,8 @@ public class InternController {
 	}
 	
 	@GetMapping("/byfirstname/{firstname}")
-	public List<InternEntity> findByFirstname(@PathVariable String firstname){
-	return this.internService.findByFirstname(firstname);
+	public List<InternEntity> findByFirstname(@PathVariable String firstName){
+	return this.internService.findByFirstName(firstName);
 	}
 	
 }
